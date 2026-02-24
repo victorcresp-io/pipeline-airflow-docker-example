@@ -8,9 +8,8 @@ on:
 jobs:
   ci:
     env:
-      PG_HOST: localhost
+      PG_HOST: ${{ secrets.PG_HOST }}
       PG_PORT: ${{ secrets.PG_PORT }}
-      PG_DB: ${{ secrets.POSTGRES_DB }}
       PG_USER: ${{ secrets.POSTGRES_USER }}
       PG_PASS: ${{ secrets.POSTGRES_PASSWORD }}
 
