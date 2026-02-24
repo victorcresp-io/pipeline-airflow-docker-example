@@ -11,7 +11,7 @@ jobs:
       PG_HOST: ${{ secrets.PG_HOST }}
       PG_PORT: ${{ secrets.PG_PORT }}
       PG_USER: ${{ secrets.PG_USER }}
-      PG_PASS: ${{ secrets.PG_PASSWORD }}
+      PG_PASS: ${{ secrets.PG_PASS }}
 
     runs-on: ubuntu-latest
     steps:
