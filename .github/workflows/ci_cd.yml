@@ -13,7 +13,7 @@ jobs:
       PG_DB: ${{ secrets.POSTGRES_DB }}
       PG_USER: ${{ secrets.POSTGRES_USER }}
       PG_PASS: ${{ secrets.POSTGRES_PASSWORD }}
-      
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -29,4 +29,4 @@ jobs:
         run: docker compose up -d --wait
 
       - name: Run pytest
-        run: pytest -q
+        run: pytest -q tests
