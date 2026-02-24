@@ -10,8 +10,8 @@ jobs:
     env:
       PG_HOST: ${{ secrets.PG_HOST }}
       PG_PORT: ${{ secrets.PG_PORT }}
-      PG_USER: ${{ secrets.POSTGRES_USER }}
-      PG_PASS: ${{ secrets.POSTGRES_PASSWORD }}
+      PG_USER: ${{ secrets.PG_USER }}
+      PG_PASS: ${{ secrets.PG_PASSWORD }}
 
     runs-on: ubuntu-latest
     steps:
