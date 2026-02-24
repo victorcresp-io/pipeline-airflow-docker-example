@@ -1,48 +1,12 @@
-x-airflow-common: &airflow-common
-  build: .
-  env_file: .env
-  volumes:
-    - ./dags:/opt/airflow/dags
-    - ./tests:/opt/airflow/tests
-    - ./keys:/opt/airflow/keys:ro
-  depends_on:
-    - postgres
-
 services:
-  postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
-
-  airflow-webserver:
-    <<: *airflow-common
-    command: webserver
+  db:
+    container_name: postgres_container
+    image: postgres:18.2
     ports:
-      - "8080:8080"
+      - 5000:5432
     environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-
-  airflow-scheduler:
-    <<: *airflow-common
-    command: scheduler
-    environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
-
-  airflow-init:
-    <<: *airflow-common
-    command: >
-      bash -c "airflow db migrate &&
-      airflow users create
-      --username victor-adm
-      --password teste123
-      --firstname Victor
-      --lastname Rodrigues
-      --role Admin
-      --email vc.crespo17@gmail.com"
-    environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      POSTGRES_DB: database
+      POSTGRES_USER: db_user
+      POSTGRES_PASSWORD: db_password
+    volumes:
+      - ./postgres/data:/var/lib/postgres/data
