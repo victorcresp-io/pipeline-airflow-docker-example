@@ -1,9 +1,18 @@
 import os
 import time
 import psycopg
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-def test_init_sql_ran():
+PG_HOST = os.getenv("PG_HOST")
+PG_PORT = os.getenv("PG_PORT")
+PG_DB   = os.getenv("PG_DB")
+PG_USER = os.getenv("PG_USER")
+PG_PASS = os.getenv("PG_PASS")
+
+def test_init_sql():
 
     with psycopg.connect(host=PG_HOST, port=PG_PORT, dbname="postgres",
                          user=PG_USER, password=PG_PASS) as conn:
