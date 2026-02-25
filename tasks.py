@@ -102,6 +102,3 @@ def insert_records(conn, data):
         print(f"Erro durante a inserção dos dados na tabela dev.raw_clima: {e}")
         raise
 
-data = mock_fetch_data()
-conn = connect_to_db()
-insert_records(conn, data)
