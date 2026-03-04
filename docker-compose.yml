@@ -16,19 +16,22 @@ services:
     
   airflow:
     container_name: airflow_container
-    image: apache/airflow:slim-3.1.7-python3.13
+    build: .
     ports:
-      - 8000:8080
+      - 8080:8080
     environment:
-      AIRFLOW_DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow@db:5432/airflow_db
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@db:5432/airflow_db
     volumes:
       - ./dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+      - ./keys/service-account.json/teste-airflow-dcoker-160d11e38205.json:v:ro
     depends_on:
       - db
     networks:
       - my_network
     command: >
       bash -c "airflow standalone"
+
 networks:
   my_network:
     driver: bridge
