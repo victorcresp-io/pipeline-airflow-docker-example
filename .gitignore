@@ -1,2 +1,9 @@
 # Arquivos do volume postgres
 postgres/data
+
+# Pycache
+/__pycache__
+/.pytest_cache
+
+# Service Account GCP (Google Cloud Storage)
+keys/service-account.json/teste-airflow-dcoker-160d11e38205.json
