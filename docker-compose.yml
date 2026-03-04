@@ -21,10 +21,11 @@ services:
       - 8080:8080
     environment:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@db:5432/airflow_db
+      AIRFLOW_CONN_VICTOR_CONEXAO: google-cloud-platform://?extra__google_cloud_platform__key_path=/opt/airflow/keys/service_account/example_service_account.json&extra__google_cloud_platform__project=pipeline-airflow-docker-example
     volumes:
       - ./dags:/opt/airflow/dags
       - ./data:/opt/airflow/data
-      - ./keys/service-account.json/teste-airflow-dcoker-160d11e38205.json:v:ro
+      - ./keys/service_account/example_service_account.json:/opt/airflow/keys/service_account/example_service_account.json:ro
     depends_on:
       - db
     networks:
