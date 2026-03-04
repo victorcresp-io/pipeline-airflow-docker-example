@@ -17,14 +17,14 @@ default_args = {
 }
 
 dag = DAG(
-    dag_id ='teste-victor',
+    dag_id ='dag_example',
     default_args = default_args,
-    schedule = timedelta(minutes= 5)
+#    schedule = timedelta(minutes= 5) Intervalo de execução do dag. Neste caso, a pipeline é acionado de 5 em 5 minutos.
 )
 
 
 
-
+# Uma dag de exemplo que extrai dados do google cloud storage.
 with dag:
     task1 = GCSToLocalFilesystemOperator(
         task_id="ingerir_dados_cloud_storage",
@@ -33,3 +33,5 @@ with dag:
         filename="/opt/airflow/file.csv",
         gcp_conn_id="victor_conexao"
     )
+
+
