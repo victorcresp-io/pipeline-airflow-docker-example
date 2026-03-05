@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_local import GCSToLocalFilesystemOperator
+from airflow.providers.google.cloud.transfers.local_to_gcs import LocalFilesystemToGCSOperator
 from utils.tasks import transformar_colunas
 
 load_dotenv()
@@ -41,7 +42,16 @@ with dag:
         python_callable=transformar_colunas
     )
 
-    task1 >> task2
+    task3 = LocalFilesystemToGCSOperator(
+        task_id="carregar_mart_gcs",
+        src="/opt/airflow/tmp/df_example.csv",
+        dst="mart/mart_exemplo.csv",
+        bucket="pipeline-airflow-docker-example",
+        gcp_conn_id="victor_conexao",
+        mime_type="text/csv",
+    )
+
+    task1 >> task2 >> task3
 
 
 
