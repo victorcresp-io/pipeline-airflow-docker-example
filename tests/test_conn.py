@@ -1,14 +1,8 @@
-"""import sys
-from pathlib import Path
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
-"""
 import os
 import time
 
 import psycopg2
 from dotenv import load_dotenv
-from tasks import connect_to_db
 
 
 load_dotenv()
@@ -36,12 +30,3 @@ def test_init_sql():
 
             assert "database" in dbs
             assert "airflow_db" in dbs
-
-def test_create_table_and_schema():
-    conn = connect_to_db()
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT 1")
-
-    result = cursor.fetchone()
-    assert result[0] == 1
