@@ -1,6 +1,8 @@
 # ETL Project – Airflow + PostgreSQL (Docker Compose)
 
-Este é um projeto de **ETL para Engenharia de Dados** que está em desenvolvimento.
+Este é um projeto de **ETL para Engenharia de Dados** que está em desenvolvimento. Na ETL de exemplo, os dados brutos são extraídos do Google Cloud Storage, transformados com pandas e carregados para a Google Cloud Storage na camada Raw.
+
+A ideia é disponibilizar um ambiente já configurado com Airflow, Docker e PostgreSQL, facilitando a criação e execução de pipelines de dados.
 
 Atualmente o projeto contém:
 
@@ -10,8 +12,7 @@ Atualmente o projeto contém:
 - Pipeline de CI configurado com verificações:
   - Se o banco de dados do Airflow foi criado
   - Se o banco de dados destinado à ingestão de dados foi criado
-
-O projeto ainda está em evolução.
+- Dag Airflow com uma ETL de exemplo.
 
 ---
 
@@ -39,13 +40,11 @@ python -m venv terminalvirtual
 source terminalvirtual/bin/activate
 ```
 
-###  Instalar as dependências
+###  Executar containers
 
 ```bash
-pip install -r requirements.txt
+docker compose build
 ```
-
-###  Executar containers
 
 ```bash
 docker compose up
