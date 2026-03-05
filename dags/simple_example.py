@@ -3,7 +3,9 @@ from datetime import datetime, timedelta
 
 from dotenv import load_dotenv
 from airflow import DAG
+from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_local import GCSToLocalFilesystemOperator
+from utils.tasks import transformar_colunas
 
 load_dotenv()
 
@@ -30,8 +32,16 @@ with dag:
         task_id="ingerir_dados_cloud_storage",
         bucket='pipeline-airflow-docker-example',
         object_name='raw/raw_exemplo_pipeline_airflow_docker.xltx',
-        filename="/opt/airflow/file.csv",
+        filename="/opt/airflow/file.xltx",
         gcp_conn_id="victor_conexao"
     )
+
+    task2 = PythonOperator(
+        task_id="transformar_dados",
+        python_callable=transformar_colunas
+    )
+
+    task1 >> task2
+
 
 
